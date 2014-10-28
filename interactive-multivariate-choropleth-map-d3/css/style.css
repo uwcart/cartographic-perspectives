@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 20px 20px;
+	font-family: "Proxima Nova Rg", Arial, Helvetica, sans-serif;
+	/* text unselectable */
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+}
+
+svg {
+	position: absolute;
+}
+
+.gratBackground {
+  fill: #D5E3FF;
+}
+
+.gratLines {
+  fill: none;
+  stroke: #999;
+  stroke-width: 1px;
+}
+
+.map {
+	border: medium solid #999;
+}
+
+.countries {
+  fill: #fff;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+.provinces {
+  fill: none;
+  stroke: #000;
+  stroke-width: 0.5px;
+  stroke-linecap: round;
+}
+
+.dropdown {
+	margin-left: 980px;
+}
+
+.infolabel {
+	position: absolute;
+	width: 200px;
+	height: 50px;
+	color: #fff;
+	background-color: #000;
+	border: solid thin #fff;
+	padding: 5px;
+}
+
+.infolabel h1 {
+	margin: 0px;
+	padding: 0px;
+	display: inline-block;
+	line-height: 1em;
+}
+
+.infolabel b {
+	float: left;
+}
+
+.labelname {
+	display: inline-block;
+	float: right;
+	margin: -25px 0px 0px 40px;
+	font-size: 1em;
+	font-weight: bold;
+	position: absolute;
+}
