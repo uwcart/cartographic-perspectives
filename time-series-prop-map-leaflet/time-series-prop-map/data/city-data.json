@@ -1,0 +1,36 @@
+{
+"type": "FeatureCollection",
+                                                                                
+"features": [
+{ "type": "Feature", "id": 1, "properties": { "id": 1, "name": "Atlanta", "lat": 33.7489, "lon": -84.3881, "2005": 85, "2006": 38, "2007": 75, "2008": 30, "2009": 9, "2010": 15, "2011": 38 }, "geometry": { "type": "Point", "coordinates": [ -84.3881, 33.7489 ] } }
+,
+{ "type": "Feature", "id": 2, "properties": { "id": 2, "name": "Chicago", "lat": 41.85, "lon": -87.65, "2005": 28, "2006": 29, "2007": 38, "2008": 26, "2009": 15, "2010": 12, "2011": 10 }, "geometry": { "type": "Point", "coordinates": [ -87.65, 41.85 ] } }
+,
+{ "type": "Feature", "id": 3, "properties": { "id": 3, "name": "Dallas", "lat": 32.7828, "lon": -96.8039, "2005": 18, "2006": 59, "2007": 22, "2008": 60, "2009": 82, "2010": 42, "2011": 18 }, "geometry": { "type": "Point", "coordinates": [ -96.8039, 32.7828 ] } }
+,
+{ "type": "Feature", "id": 4, "properties": { "id": 4, "name": "Denver", "lat": 39.7392, "lon": -104.9842, "2005": 35, "2006": 45, "2007": 31, "2008": 26, "2009": 14, "2010": 9, "2011": 15 }, "geometry": { "type": "Point", "coordinates": [ -104.9842, 39.7392 ] } }
+,
+{ "type": "Feature", "id": 5, "properties": { "id": 5, "name": "Houston", "lat": 29.7631, "lon": -95.3631, "2005": 12, "2006": 31, "2007": 15, "2008": 22, "2009": 28, "2010": 38, "2011": 31 }, "geometry": { "type": "Point", "coordinates": [ -95.3631, 29.7631 ] } }
+,
+{ "type": "Feature", "id": 6, "properties": { "id": 6, "name": "Kansas City", "lat": 39.0997, "lon": -94.5783, "2005": 25, "2006": 50, "2007": 25, "2008": 25, "2009": 25, "2010": 25, "2011": 100 }, "geometry": { "type": "Point", "coordinates": [ -94.5783, 39.0997 ] } }
+,
+{ "type": "Feature", "id": 7, "properties": { "id": 7, "name": "Los Angeles", "lat": 34.0522, "lon": -118.2428, "2005": 88, "2006": 46, "2007": 56, "2008": 15, "2009": 12, "2010": 25, "2011": 46 }, "geometry": { "type": "Point", "coordinates": [ -118.2428, 34.0522 ] } }
+,
+{ "type": "Feature", "id": 8, "properties": { "id": 8, "name": "Miami", "lat": 25.7738, "lon": -80.1924, "2005": 52, "2006": 51, "2007": 46, "2008": 68, "2009": 75, "2010": 85, "2011": 96 }, "geometry": { "type": "Point", "coordinates": [ -80.1924, 25.7738 ] } }
+,
+{ "type": "Feature", "id": 9, "properties": { "id": 9, "name": "Minneapolis", "lat": 44.98, "lon": -93.2636, "2005": 7, "2006": 12, "2007": 18, "2008": 11, "2009": 9, "2010": 9, "2011": 4 }, "geometry": { "type": "Point", "coordinates": [ -93.2636, 44.98 ] } }
+,
+{ "type": "Feature", "id": 10, "properties": { "id": 10, "name": "New York", "lat": 40.7142, "lon": -74.0064, "2005": 23, "2006": 18, "2007": 16, "2008": 24, "2009": 26, "2010": 28, "2011": 30 }, "geometry": { "type": "Point", "coordinates": [ -74.0064, 40.7142 ] } }
+,
+{ "type": "Feature", "id": 11, "properties": { "id": 11, "name": "Philadelphia", "lat": 39.9522, "lon": -75.1642, "2005": 32, "2006": 28, "2007": 29, "2008": 25, "2009": 22, "2010": 15, "2011": 8 }, "geometry": { "type": "Point", "coordinates": [ -75.1642, 39.9522 ] } }
+,
+{ "type": "Feature", "id": 12, "properties": { "id": 12, "name": "Phoenix", "lat": 33.4539, "lon": -112.0746, "2005": 8, "2006": 15, "2007": 22, "2008": 25, "2009": 29, "2010": 28, "2011": 32 }, "geometry": { "type": "Point", "coordinates": [ -112.0746, 33.4539 ] } }
+,
+{ "type": "Feature", "id": 13, "properties": { "id": 13, "name": "San Francisco", "lat": 37.775, "lon": -122.4183, "2005": 82, "2006": 74, "2007": 72, "2008": 10, "2009": 85, "2010": 88, "2011": 74 }, "geometry": { "type": "Point", "coordinates": [ -122.4183, 37.775 ] } }
+,
+{ "type": "Feature", "id": 14, "properties": { "id": 14, "name": "Seattle", "lat": 47.6097, "lon": -122.3331, "2005": 9, "2006": 16, "2007": 14, "2008": 23, "2009": 45, "2010": 66, "2011": 85 }, "geometry": { "type": "Point", "coordinates": [ -122.3331, 47.6097 ] } }
+,
+{ "type": "Feature", "id": 15, "properties": { "id": 15, "name": "Washington", "lat": 38.89, "lon": -77.03, "2005": 33, "2006": 45, "2007": 68, "2008": 96, "2009": 102, "2010": 82, "2011": 74 }, "geometry": { "type": "Point", "coordinates": [ -77.03, 38.89 ] } }
+
+]
+}
