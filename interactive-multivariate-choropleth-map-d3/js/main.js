@@ -1,4 +1,4 @@
-/*********************************************************
+/********************************************************
 Written for Cartographic Perspectives: On the Horizon
 Modified from an Interactive Cartography and Geovisualization laboratory exercise given in Spring, 2013
 Copyright (c) October 2013, Carl Sack and the University of Wisconsin-Madison Cartography Program
@@ -21,9 +21,9 @@ function setMap(){ //set choropleth map parameters
 	var height = 460;
 	
 	//optional--create a title for the page
-	var title = d3.select("body")
-		.append("h1")
-		.text("France Provinces Choropleth");
+	// var title = d3.select("body")
+	// 	.append("h1")
+	// 	.text("France Provinces Choropleth");
 	
 	//create a new svg element with the above dimensions
 	var map = d3.select("body")
@@ -60,17 +60,19 @@ function setMap(){ //set choropleth map parameters
 		.append("path") //append each element to the svg as a path element
 		.attr("class", "gratLines") //assign class for styling
 		.attr("d", path); //project graticule lines
-		
+
 	queue() //use queue.js to parallelize asynchronous data loading for cpu efficiency
 		.defer(d3.csv, "data/unitsData.csv") //load attributes data from csv
-		.defer(d3.json, "data/europe.topojson") //load geometry from countries topojson
+		.defer(d3.json, "data/EuropeCountries.topojson") //load geometry from countries topojson
+		.defer(d3.json, "data/FranceProvinces.topojson") //load geometry from provinces topojson
 		.await(callback);
 
-	function callback(error, csvData, europe){
+	function callback(error, csvData, europeData, franceData){
+		
 		var recolorMap = colorScale(csvData); //retrieve color scale generator
 
 		//variables for csv to json data transfer
-		var jsonProvs = europe.objects.FranceProvinces.geometries;
+		var jsonProvs = franceData.objects.FranceProvinces.geometries;
 			
 		//loop through csv data to assign each csv province's values to json province properties
 		for (var i=0; i<csvData.length; i++) {		
@@ -95,21 +97,21 @@ function setMap(){ //set choropleth map parameters
 				};
 			};
 		};
-		
+
 		//add Europe countries geometry to map			
 		var countries = map.append("path") //create SVG path element
-			.datum(topojson.feature(europe, europe.objects.EuropeCountries)) //bind countries data to path element
+			.datum(topojson.feature(europeData, europeData.objects.EuropeCountries)) //bind countries data to path element
 			.attr("class", "countries") //assign class for styling countries
 			.attr("d", path); //project data as geometry in svg
 
 		//add provinces to map as enumeration units colored by data
 		var provinces = map.selectAll(".provinces")
-			.data(topojson.feature(europe, europe.objects.FranceProvinces).features) //bind provinces data to path element
+			.data(topojson.feature(franceData, franceData.objects.FranceProvinces).features) //bind provinces data to path element
 			.enter() //create elements
 			.append("g") //give each province its own g element
 			.attr("class", "provinces") //assign class for additional styling
 			.append("path")
-			.attr("class", function(d) { return d.properties.adm1_code })
+			.attr("id", function(d) { return d.properties.adm1_code })
 			.attr("d", path) //project data as geometry in svg
 			.style("fill", function(d) { //color enumeration units
 				return choropleth(d, recolorMap);
@@ -123,6 +125,7 @@ function setMap(){ //set choropleth map parameters
 				});
 
 		createDropdown(csvData); //create the dropdown menu
+
 	};
 };
 
@@ -159,11 +162,20 @@ function colorScale(csvData){
 			"#980043"
 		]);
 	
-	//set min and max data values as domain
-	color.domain([
-		d3.min(csvData, function(d) { return Number(d[expressed]); }),
-		d3.max(csvData, function(d) { return Number(d[expressed]); })
-	]);
+	//build array of all currently expressed values for input domain
+	var domainArray = [];
+	for (var i in csvData){
+		domainArray.push(Number(csvData[i][expressed]));
+	};
+	
+	//for equal-interval scale, use min and max expressed data values as domain
+	// color.domain([
+	// 	d3.min(csvData, function(d) { return Number(d[expressed]); }),
+	// 	d3.max(csvData, function(d) { return Number(d[expressed]); })
+	// ]);
+
+	//for quantile scale, pass array of expressed values as domain
+	color.domain(domainArray);
 	
 	return color; //return the color scale generator
 };
@@ -226,7 +238,7 @@ function highlight(data){
 	
 	var props = data.properties; //json properties
 
-	d3.select("."+props.adm1_code) //select the current province in the DOM
+	d3.select("#"+props.adm1_code) //select the current province in the DOM
 		.style("fill", "#000"); //set the enumeration unit fill to black
 
 	var labelAttribute = "<h1>"+props[expressed]+
@@ -247,7 +259,7 @@ function highlight(data){
 function dehighlight(data){
 	
 	var props = data.properties; //json properties
-	var prov = d3.select("."+props.adm1_code); //designate selector variable for brevity
+	var prov = d3.select("#"+props.adm1_code); //select the current province
 	var fillcolor = prov.select("desc").text(); //access original color from desc
 	prov.style("fill", fillcolor); //reset enumeration unit to orginal color
 	
