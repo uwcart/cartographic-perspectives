@@ -64,7 +64,7 @@ function setMap(){ //set choropleth map parameters
 	queue() //use queue.js to parallelize asynchronous data loading for cpu efficiency
 		.defer(d3.csv, "data/unitsData.csv") //load attributes data from csv
 		.defer(d3.json, "data/EuropeCountries.topojson") //load geometry from countries topojson
-		.defer(d3.json, "data/FranceProvinces.topojson") //load geometry from provinces topojson
+		.defer(d3.json, "data/FranceRegions.topojson") //load geometry from provinces topojson
 		.await(callback);
 
 	function callback(error, csvData, europeData, franceData){
@@ -72,7 +72,7 @@ function setMap(){ //set choropleth map parameters
 		var recolorMap = colorScale(csvData); //retrieve color scale generator
 
 		//variables for csv to json data transfer
-		var jsonProvs = franceData.objects.FranceProvinces.geometries;
+		var jsonProvs = franceData.objects.FranceRegions.geometries;
 			
 		//loop through csv data to assign each csv province's values to json province properties
 		for (var i=0; i<csvData.length; i++) {		
@@ -106,7 +106,7 @@ function setMap(){ //set choropleth map parameters
 
 		//add provinces to map as enumeration units colored by data
 		var provinces = map.selectAll(".provinces")
-			.data(topojson.feature(franceData, franceData.objects.FranceProvinces).features) //bind provinces data to path element
+			.data(topojson.feature(franceData, franceData.objects.FranceRegions).features) //bind provinces data to path element
 			.enter() //create elements
 			.append("g") //give each province its own g element
 			.attr("class", "provinces") //assign class for additional styling
