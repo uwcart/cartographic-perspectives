@@ -23,7 +23,7 @@ function setMap(){ //set choropleth map parameters
 	//optional--create a title for the page
 	// var title = d3.select("body")
 	// 	.append("h1")
-	// 	.text("France Provinces Choropleth");
+	// 	.text("France Regions Choropleth");
 	
 	//create a new svg element with the above dimensions
 	var map = d3.select("body")
@@ -64,7 +64,7 @@ function setMap(){ //set choropleth map parameters
 	queue() //use queue.js to parallelize asynchronous data loading for cpu efficiency
 		.defer(d3.csv, "data/unitsData.csv") //load attributes data from csv
 		.defer(d3.json, "data/EuropeCountries.topojson") //load geometry from countries topojson
-		.defer(d3.json, "data/FranceRegions.topojson") //load geometry from provinces topojson
+		.defer(d3.json, "data/FranceRegions.topojson") //load geometry from regions topojson
 		.await(callback);
 
 	function callback(error, csvData, europeData, franceData){
@@ -72,28 +72,28 @@ function setMap(){ //set choropleth map parameters
 		var recolorMap = colorScale(csvData); //retrieve color scale generator
 
 		//variables for csv to json data transfer
-		var jsonProvs = franceData.objects.FranceRegions.geometries;
+		var jsonRegions = franceData.objects.FranceRegions.geometries;
 			
-		//loop through csv data to assign each csv province's values to json province properties
+		//loop through csv data to assign each csv region's values to json region properties
 		for (var i=0; i<csvData.length; i++) {		
-			var csvProvince = csvData[i]; //the current province's attributes
-			var csvAdm1 = csvProvince.adm1_code; //adm1 code
+			var csvRegion = csvData[i]; //the current region's attributes
+			var csvAdm1 = csvRegion.adm1_code; //adm1 code
 			
-			//loop through json provinces to assign csv data to the right province
-			for (var a=0; a<jsonProvs.length; a++){
+			//loop through json regions to assign csv data to the right region
+			for (var a=0; a<jsonRegions.length; a++){
 				
 				//where adm1 codes match, attach csv data to json object
-				if (jsonProvs[a].properties.adm1_code == csvAdm1){
+				if (jsonRegions[a].properties.adm1_code == csvAdm1){
 					
 					//one more for loop to assign all key/value pairs to json object
 					for (var key in keyArray){
 						var attr = keyArray[key];
-						var val = parseFloat(csvProvince[attr]);
-						jsonProvs[a].properties[attr] = val;
+						var val = parseFloat(csvRegion[attr]);
+						jsonRegions[a].properties[attr] = val;
 					};
 					
-					jsonProvs[a].properties.name = csvProvince.name; //set prop
-					break; //stop looking through the json provinces
+					jsonRegions[a].properties.name = csvRegion.name; //set prop
+					break; //stop looking through the json regions
 				};
 			};
 		};
@@ -104,12 +104,12 @@ function setMap(){ //set choropleth map parameters
 			.attr("class", "countries") //assign class for styling countries
 			.attr("d", path); //project data as geometry in svg
 
-		//add provinces to map as enumeration units colored by data
-		var provinces = map.selectAll(".provinces")
-			.data(topojson.feature(franceData, franceData.objects.FranceRegions).features) //bind provinces data to path element
+		//add regions to map as enumeration units colored by data
+		var regions = map.selectAll(".regions")
+			.data(topojson.feature(franceData, franceData.objects.FranceRegions).features) //bind regions data to path element
 			.enter() //create elements
-			.append("g") //give each province its own g element
-			.attr("class", "provinces") //assign class for additional styling
+			.append("g") //give each region its own g element
+			.attr("class", "regions") //assign class for additional styling
 			.append("path")
 			.attr("id", function(d) { return d.properties.adm1_code })
 			.attr("d", path) //project data as geometry in svg
@@ -197,12 +197,12 @@ function changeAttribute(attribute, csvData){
 	expressed = attribute;
 	
 	//recolor the map
-	d3.selectAll(".provinces") //select every province
+	d3.selectAll(".regions") //select every region
 		.select("path")
 		.style("fill", function(d) { //color enumeration units
 			return choropleth(d, colorScale(csvData)); //->
 		})
-		.select("desc") //replace the color text in each province's desc element
+		.select("desc") //replace the color text in each region's desc element
 			.text(function(d) {
 				return choropleth(d, colorScale(csvData)); //->
 			});
@@ -238,7 +238,7 @@ function highlight(data){
 	
 	var props = data.properties; //json properties
 
-	d3.select("#"+props.adm1_code) //select the current province in the DOM
+	d3.select("#"+props.adm1_code) //select the current region in the DOM
 		.style("fill", "#000"); //set the enumeration unit fill to black
 
 	var labelAttribute = "<h1>"+props[expressed]+
@@ -259,9 +259,9 @@ function highlight(data){
 function dehighlight(data){
 	
 	var props = data.properties; //json properties
-	var prov = d3.select("#"+props.adm1_code); //select the current province
-	var fillcolor = prov.select("desc").text(); //access original color from desc
-	prov.style("fill", fillcolor); //reset enumeration unit to orginal color
+	var region = d3.select("#"+props.adm1_code); //select the current region
+	var fillcolor = region.select("desc").text(); //access original color from desc
+	region.style("fill", fillcolor); //reset enumeration unit to orginal color
 	
 	d3.select("#"+props.adm1_code+"label").remove(); //remove info label
 };
