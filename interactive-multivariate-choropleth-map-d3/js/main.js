@@ -108,9 +108,8 @@ function setMap(){ //set choropleth map parameters
 		var regions = map.selectAll(".regions")
 			.data(topojson.feature(franceData, franceData.objects.FranceRegions).features) //bind regions data to path element
 			.enter() //create elements
-			.append("g") //give each region its own g element
+			.append("path") //append elements to svg
 			.attr("class", "regions") //assign class for additional styling
-			.append("path")
 			.attr("id", function(d) { return d.properties.adm1_code })
 			.attr("d", path) //project data as geometry in svg
 			.style("fill", function(d) { //color enumeration units
@@ -198,7 +197,6 @@ function changeAttribute(attribute, csvData){
 	
 	//recolor the map
 	d3.selectAll(".regions") //select every region
-		.select("path")
 		.style("fill", function(d) { //color enumeration units
 			return choropleth(d, colorScale(csvData)); //->
 		})
