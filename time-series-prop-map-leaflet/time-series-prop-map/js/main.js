@@ -8,8 +8,8 @@ $(document).ready(function() {
 		});
 
 	L.tileLayer(
-		'http://{s}.acetate.geoiq.com/tiles/acetate/{z}/{x}/{y}.png', {
-			attribution: 'Acetate tileset from GeoIQ'
+		'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap Contributors</a>'
 	}).addTo(map);
 
 	$.getJSON("data/city-data.json")
