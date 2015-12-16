@@ -8,8 +8,8 @@ $(document).ready(function() {
 		});
 
 	L.tileLayer(
-		'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap Contributors</a>'
+		'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
 	}).addTo(map);
 
 	$.getJSON("data/city-data.json")
